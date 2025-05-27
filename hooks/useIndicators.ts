@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { calculateSMA, calculateEMA, calculateRSI, calculateMACD } from '../utils/indicators';
+import { calculateSMA, calculateEMA, calculateRSI, calculateMACD } from '../src/utils/indicators';
 
 /**
  * useIndicators - Efficiently compute all selected indicators for a candle array
