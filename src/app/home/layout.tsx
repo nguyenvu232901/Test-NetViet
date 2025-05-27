@@ -1,16 +1,8 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-
-export const ThemeContext = createContext<{
-  theme: 'light' | 'dark';
-  setTheme: (t: 'light' | 'dark') => void;
-}>({ theme: 'light', setTheme: () => {} });
-
-export function useTheme() {
-  return useContext(ThemeContext);
-}
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function HomeLayout({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -40,10 +32,10 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={theme === 'dark' ? 'dark flex flex-col min-h-screen bg-[#111] text-[#fff]' : 'flex flex-col min-h-screen bg-white text-gray-900'}>
+      <div className={theme === 'dark' ? 'dark flex flex-col min-h-screen bg-[#111] text-gray-100' : 'flex flex-col min-h-screen bg-white text-gray-900'}>
         <Header />
         <main className="flex-1">{children}</main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </ThemeContext.Provider>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import ThemeToggle from './ThemeToggle';
-import { useTheme } from '../app/home/layout';
+import { useTheme } from '../context/ThemeContext';
 
 const Header: React.FC = () => {
   const { theme, setTheme } = useTheme();
