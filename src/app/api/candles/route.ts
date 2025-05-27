@@ -15,16 +15,19 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    // Giảm limit xuống 500 để tránh timeout/serverless limit
     const response = await axios.get(
-      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=1000`,
+      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=500`,
       {
         headers: {
           'User-Agent': 'Mozilla/5.0 (compatible; VercelBot/1.0)'
         }
       }
     );
-
-    return new Response(JSON.stringify(response.data), {
+    // Log số lượng nến trả về
+    const candles = response.data;
+    console.log('Binance candles length:', candles.length);
+    return new Response(JSON.stringify(candles), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
