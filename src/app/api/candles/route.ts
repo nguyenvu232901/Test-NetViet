@@ -10,10 +10,11 @@ export async function GET(req: NextRequest) {
   }
   try {
     const response = await axios.get(
-      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=1000`
+      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=1000`,
+      { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; VercelBot/1.0)' } }
     );
     return new Response(JSON.stringify(response.data), { status: 200 });
-  } catch (error) {
-    return new Response(JSON.stringify({ error: 'Failed to fetch data' }), { status: 500 });
+  } catch (error: any) {
+    return new Response(JSON.stringify({ error: error?.message || 'Failed to fetch data', detail: error?.response?.data }), { status: 500 });
   }
 }
