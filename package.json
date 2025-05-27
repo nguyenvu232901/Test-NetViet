@@ -1,0 +1,34 @@
+{
+  "name": "btc-dashboard",
+  "version": "1.0.0",
+  "description": "A dashboard for BTC data visualization.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "btc",
+    "dashboard",
+    "nextjs"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "axios": "^1.9.0",
+    "lightweight-charts": "^5.0.7",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.15.21",
+    "@types/react": "19.1.5",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
+    "typescript": "5.8.3"
+  }
+}
