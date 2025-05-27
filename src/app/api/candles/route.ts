@@ -15,18 +15,19 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Giảm limit xuống 500 để tránh timeout/serverless limit
+    // Giảm limit xuống 100 để tránh timeout/serverless limit
     const response = await axios.get(
-      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=500`,
+      `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=100`,
       {
         headers: {
           'User-Agent': 'Mozilla/5.0 (compatible; VercelBot/1.0)'
         }
       }
     );
-    // Log số lượng nến trả về
     const candles = response.data;
-    console.log('Binance candles length:', candles.length);
+    if (!Array.isArray(candles) || candles.length < 20) {
+      return new Response(JSON.stringify({ error: 'Not enough data from Binance', length: candles.length, candles }), { status: 500 });
+    }
     return new Response(JSON.stringify(candles), {
       status: 200,
       headers: {
@@ -35,6 +36,7 @@ export async function GET(req: NextRequest) {
       }
     });
   } catch (error: any) {
+    console.error('Error fetching data from Binance:', error); // Log lỗi chi tiết
     return new Response(
       JSON.stringify({
         error: error?.message || 'Failed to fetch data',

@@ -23,7 +23,7 @@ export const GetCandles = async (
     const response = await axios.get<
       [number, string, string, string, string, string, number, string, number, string, string, string][]
     >(
-      `/api/candles?symbol=${currentCoin}&interval=${currentTimeFrame}`
+      `https://binance-proxy-kyxb.onrender.com/api/candles?symbol=${currentCoin}&interval=${currentTimeFrame}`
     );
 
     return response.data.map((item) => ({
